@@ -2,6 +2,7 @@
 from getch import getch
 from termcolor import colored
 from userinput import UserInput
+import collections
 import os
 
 
@@ -13,7 +14,7 @@ def main():
         key = getch()
         s.update(key)
         os.system('clear')
-        print(colored(s.correct_text, 'green') + colored(s.get_incorrect_symbol, 'red') + s.get_black_text)
+        print(colored(s.correct_text(), 'green') + colored(s.get_incorrect_symbol(), 'red') + s.get_black_text())
         print(colored(s.correct_input, 'green') + colored(s.incorrect_text, 'red'))
     os.system('clear')
     print(colored(s.text, 'green'))
