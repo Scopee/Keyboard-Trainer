@@ -2,7 +2,7 @@ class UserInput:
     def __init__(self, text):
         self._text = text.split(' ')
         for i in range(0, len(self._text) - 1):
-            self._text[i] = self._text[i] + ' '
+            self._text[i] += ' '
         self._input = ''
         self._word = ''
         self._error_idx = 0
@@ -38,7 +38,7 @@ class UserInput:
         res += self._correct_text
         return res
 
-    def get_black_text(self):
+    def get_blank_text(self):
         if self._word_idx < len(self._text):
             if self._incorrect_text:
                 res = self._text[self._word_idx][len(self._correct_text) + 1:]
