@@ -1,10 +1,10 @@
 #!usr/bin/env python3
-from game import Game
+from menu import Menu
 
 
 def main():
-    game = Game()
-    game.start_game()
+    menu = Menu()
+    menu.run()
 
 
 if __name__ == '__main__':

@@ -3,13 +3,13 @@ import os
 from termcolor import colored
 import timeit
 from getch import Getch
+from user import User
 
 
 class Game:
     def __init__(self):
-        text = 'Спустя неделю после рождения нашей дочери Лорен мы ' \
-               'с Бонни чувствовали себя совершенно измотанными. ' \
-               'Ночами ребенок то и дело будил нас.'
+        text = 'Спустя неделю после рождения нашей дочери Лорен мы'
+        self._user = User()
         self._user_input = UserInput(text)
         self._getch = Getch()
 
@@ -17,8 +17,11 @@ class Game:
         os.system('clear')
         print(self._user_input.text)
         start_time = timeit.default_timer()
+        is_finished = False
         while not (self._user_input.is_done()):
             key = self._getch()
+            if key == '\x1b':
+                break
             self._user_input.update(key)
             os.system('clear')
             print('{}{}{}'.format(
@@ -30,9 +33,11 @@ class Game:
                 '{}{}'.format(colored(self._user_input.correct_input, 'green'),
                               colored(self._user_input.incorrect_text, 'red')))
         time = timeit.default_timer()
-        os.system('clear')
-        print(colored(self._user_input.text, 'green'))
-        print('Accurate: {:.2%}'.format(self._user_input.accurate))
-        print('Time: {:.2f} seconds'.format(time - start_time))
-
-
+        if is_finished:
+            os.system('clear')
+            print(colored(self._user_input.text, 'green'))
+            print('{}: {:.2%}'.format(self._user.get_strings()['acc'],
+                                      self._user_input.accurate))
+            print('{}: {:.2f} {}'.format(self._user.get_strings()['time'],
+                                         time - start_time,
+                                         self._user.get_strings()['sec']))
