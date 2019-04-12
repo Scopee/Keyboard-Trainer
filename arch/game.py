@@ -1,9 +1,9 @@
-from userinput import UserInput
+from arch.userinput import UserInput
 import os
 from termcolor import colored
 import timeit
-from getch import Getch
-from user import User
+from arch.getch import Getch
+from arch.user import User
 
 
 class Game:
@@ -17,10 +17,11 @@ class Game:
         os.system('clear')
         print(self._user_input.text)
         start_time = timeit.default_timer()
-        is_finished = False
+        is_finished = True
         while not (self._user_input.is_done()):
             key = self._getch()
             if key == '\x1b':
+                is_finished = False
                 break
             self._user_input.update(key)
             os.system('clear')
