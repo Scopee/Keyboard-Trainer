@@ -4,11 +4,13 @@ from termcolor import colored
 import timeit
 from arch.getch import Getch
 from arch.user import User
+from arch.generator import Generator
 
 
 class Game:
     def __init__(self):
-        text = 'Спустя неделю после рождения нашей дочери Лорен мы'
+        gen = Generator()
+        text = gen.get_random_string()
         self._user = User()
         self._user_input = UserInput(text)
         self._getch = Getch()

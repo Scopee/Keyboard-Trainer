@@ -1,10 +1,12 @@
 #!/usr/local/bin/python3
 from arch.menu import Menu
+from arch.generator import Generator
 from arch.settings import Settings
 import sys
 
 
 def main():
+    Generator.check_texts()
     args = sys.argv
     if len(args) > 1:
         print_help()
