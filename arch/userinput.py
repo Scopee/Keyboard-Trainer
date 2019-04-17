@@ -55,9 +55,9 @@ class UserInput:
         return ''
 
     def update_word(self, symbol):
-        if bytes(symbol, encoding='utf8') == b'\x1b':
+        if symbol == '\x1b':
             return
-        if bytes(symbol, encoding='utf8') == b'\x7f':
+        if symbol == '\x7f':
             if self._error_idx > 0 or self._word:
                 self._word = self._word[0: len(self._word) - 1]
                 if len(self._incorrect_text) == 0:
