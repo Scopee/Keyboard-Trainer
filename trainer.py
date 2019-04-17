@@ -17,8 +17,7 @@ def main():
 
 def print_help():
     settings = Settings.load_from_settings()
-    lang = settings['USER']['language']
-    strings = settings['STRINGS.' + lang]
+    strings = settings['STRINGS.{}'.format(settings['USER']['language'])]
     print(strings['about'])
     print(strings['help'])
 
