@@ -50,7 +50,16 @@ def test_two_words():
 def test_backspace():
     string = 'test'
     inp = UserInput(string)
-    inp.update('\x1b')
+    inp.update('\x7f')
+    assert '' == inp.correct_input
+    assert '' == inp.incorrect_text
+
+
+def test_del_backspace():
+    string = 'test'
+    inp = UserInput(string)
+    inp.update('t')
+    inp.update('\x7f')
     assert '' == inp.correct_input
     assert '' == inp.incorrect_text
 
@@ -60,6 +69,6 @@ def test_backspace_after_word():
     inp = UserInput(string)
     for s in string[:5]:
         inp.update(s)
-    inp.update('\x1b')
+    inp.update('\x7f')
     assert '' == inp.correct_input
     assert '' == inp.incorrect_text
