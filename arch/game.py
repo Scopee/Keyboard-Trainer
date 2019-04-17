@@ -1,10 +1,10 @@
 from arch.userinput import UserInput
-import os
 from termcolor import colored
-import timeit
 from arch.getch import Getch
 from arch.user import User
 from arch.generator import Generator
+import timeit
+import os
 
 
 class Game:
