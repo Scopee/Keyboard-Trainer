@@ -7,7 +7,7 @@ class Settings:
     def load_from_settings():
         if not os.path.exists('settings.ini'):
             config = configparser.ConfigParser()
-            config['USER'] = {'username': 'User', 'language': 'en'}
+            config['USER'] = {'username': 'User', 'language': 'EN'}
             with open('settings.ini', 'w') as f:
                 config.write(f)
         config = configparser.ConfigParser()
