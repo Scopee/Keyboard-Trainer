@@ -25,7 +25,8 @@ class Menu:
                 break
 
     def print_options(self):
-        os.system('clear')
+        # os.system('clear')
+        Game.clear()
         strings = self._user.get_strings()
         print('{}, {}'.format(strings['welcome'], self._user.name))
         print(strings['select'])
