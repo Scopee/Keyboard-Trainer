@@ -21,7 +21,7 @@ class Menu:
             if option == '1':
                 self.start_game()
             elif option in {'2', '\x03'}:
-                os.system('clear')
+                Game.clear()
                 break
 
     def print_options(self):
