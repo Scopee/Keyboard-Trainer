@@ -6,46 +6,44 @@ import os
 # TODO '''
 # Просится такая декомпозиция:
 #
-# Нечто, чистящее текст и разбивающее его по предложениям Нечто, принимающее
-# на вход список предложений и выдаёт некоторый набор предложений для набора
+# Нечто, чистящее текст и разбивающее его по предложениям
+# Нечто, принимающее на вход список предложений и выдаёт
+# некоторый набор предложений для набора
 #
 # '''
 class Generator:
     @staticmethod
     def generate_text(file):
-        with open(file) as f:
-            text = f.read().split('\n')
-            result = []
-            for line in text:
-                length = len(
-                    line.replace('!', '.').replace('?', '.').split('.'))
-                if length > 4 and len(line) > 70 and not line.startswith('– '):
-                    line = line[:250]
-                    index = line.rfind('.')
-                    line_to_append = line[:index]
-                    result.append(
-                        line_to_append.replace('«', "\"")
-                        .replace('–', '-')
-                        .replace('»', '\"') + '.')
-                    continue
-                if len(line) < 70 or line.startswith('– ') or length < 2:
-                    continue
-                result.append(line.replace('«', "\"")
-                              .replace('–', '-')
-                              .replace('»', '\"'))
-        return result
+        sentences = Generator \
+            .clear_sentences(Generator.get_sentences(file))
+        res = []
+        for i in range(len(sentences)):
+            st = ''
+            rd = random.randint(2, 3)
+            for j in range(rd):
+                if i + j < len(sentences):
+                    st += sentences[i + j] + ' '
+            st = st[:-1]
+            res.append(st)
+            i += rd + 1
+        return res
 
     @staticmethod
-    def split_text(text: str):
-        sent = text.replace('!', '.') \
-            .replace('\n', '.') \
-            .replace('?', '.') \
-            .split('.')
-        for s in sent:
-            if not s or s.startswith('– ') or s.startswith(
-                    ' ') or s.startswith('\t'):
-                sent.remove(s)
-        return sent
+    def clear_sentences(sentences):
+        sentences = map(lambda x: x + '.', sentences)
+        return list(map(lambda x: x.replace('«', "\"")
+                        .replace('–', '-')
+                        .replace('»', '\"'), sentences))
+
+    @staticmethod
+    def get_sentences(file):
+        with open(file) as f:
+            text = f.read()
+            text = text.replace('!', '.').replace('?', '.').replace('\n', '')
+            text = text.split('.')
+            text = filter(lambda x: x, text)
+            text = filter(lambda x: x[0].isupper(), text)
+        return list(text)
 
     @staticmethod
     def clear_text(text):
