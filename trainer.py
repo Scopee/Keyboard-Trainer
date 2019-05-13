@@ -9,7 +9,6 @@ import os
 def main():
     Generator.check_texts()
     args = sys.argv
-
     if len(args) > 1:
         print_help()
     else:
